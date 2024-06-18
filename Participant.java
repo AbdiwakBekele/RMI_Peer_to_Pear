@@ -6,7 +6,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +21,6 @@ public class Participant extends UnicastRemoteObject implements ParticipantInter
     private BootstrapNodeInterface bootstrapNode;
     private Map<String, ParticipantInterface> peers;
     private Set<String> infectedParticipants;
-    private boolean isBootstrapNode;
     private boolean isInfected;
 
     protected Participant(String name, BootstrapNodeInterface bootstrapNode, boolean isBootstrapNode)
@@ -32,7 +30,6 @@ public class Participant extends UnicastRemoteObject implements ParticipantInter
         this.bootstrapNode = bootstrapNode;
         this.peers = new HashMap<>();
         this.infectedParticipants = new HashSet<>();
-        this.isBootstrapNode = isBootstrapNode;
         this.isInfected = false;
         bootstrapNode.registerParticipant(name, this);
         discoverPeers();
